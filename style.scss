@@ -1,0 +1,197 @@
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700&family=Open+Sans&display=swap");
+*,
+body {
+    padding: 0;
+    margin: 0;
+}
+
+$font: "Merriweather", serif;
+
+body {
+    font-family: $font;
+    font-size: 14px;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+.header {
+    color: white;
+    background-color: black;
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(rgba(1, 1, 1, 0.5), rgba(0, 0, 0, 1)), url("/bg.png") no-repeat;
+    background-size: cover;
+    .head-text {
+        position: absolute;
+        top: 80%;
+        left: 30%;
+        transform: translate(-50%, -50%);
+        text-align: left;
+        em {
+            font-weight: 300;
+        }
+        h4 {
+            font-size: 1rem;
+            font-weight: normal;
+            line-height: 1rem;
+        }
+    }
+}
+h1 {
+    font-weight: 600;
+    font-size: 3rem;
+    span {
+        font-weight: 400;
+    }
+}
+
+.ruler {
+    margin-top: 5px;
+}
+
+.pros {
+    margin-top: 10px;
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(150px, 1fr));
+
+    // grid-template-rows: repeat( 2, 150px ) ;
+    grid-gap: 10px;
+    .pro {
+        background-color: #84a9ac;
+        border-radius: 0.2rem;
+        box-sizing: border-box;
+        color: #204051;
+        .pro-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 10px auto 5px 20px;
+        }
+        .pro-desc {
+            margin: 5px 20px 15px 20px;
+            text-align: justify;
+            font-weight: 600;
+            font-size: 0.8rem;
+            font-family: "Open Sans", sans-serif;
+            line-height: 1.35rem;
+        }
+        .pro-tools {
+            margin: 8px 20px 20px 20px;
+            font-size: 0.8rem;
+        }
+    }
+}
+
+.section:nth-child(2) {
+    background-color: #eeeeee;
+    color: black;
+}
+
+.sec-title {
+}
+
+.skill-grp {
+    min-width: 300px;
+    height: 50px;
+    margin-top: 5px;
+
+    p {
+        font-size: 0.8rem;
+        font-family: "Open Sans", sans-serif;
+        // text-transform: uppercase;
+        font-weight: 600;
+        margin-bottom: 0.2rem;
+        i {
+            font-size: 1rem;
+            margin-right: 5px;
+            color: #204051;
+            // float: right;
+        }
+    }
+    .full-bar {
+        width: 300px;
+        height: 10px;
+        background-color: #e7dfd5;
+
+        border-radius: 10px;
+        .skill-bar {
+            border-radius: 10px;
+            height: 10px;
+            background-color: #84a9ac;
+        }
+    }
+}
+.skill-col {
+    // float: left;
+    // margin-right: 40px;
+    // width: 29%;
+    box-sizing: border-box;
+}
+.skill-row {
+    margin-top: 15px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(33%, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(500px, 1fr));
+    justify-items: center;
+}
+// hr {
+//     border: solid 1px;
+// }
+
+@media only screen and (max-width: 600px) {
+    body {
+        background-color: #eeeeee;
+    }
+    .header {
+        .head-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin: 0;
+            padding: 0;
+            transform: translateY(0px, 0px);
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        h1 {
+            font-size: 1.8rem;
+        }
+    }
+    .fp-responsive {
+        width: 100%;
+    }
+    .pros {
+        .pro {
+            .pro-tools {
+                font-size: 0.6rem;
+            }
+        }
+    }
+    .sec-title {
+        margin-top: 55px;
+    }
+    .ruler {
+        margin-top: 10px;
+    }
+    .skill-col {
+        // margin-right: 0px;
+        width: 100%;
+    }
+    .skill-row {
+        width: 100%;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(auto-fill, minmax(290px, 1fr));
+    }
+
+    .skill-grp {
+        width: 100%;
+        .full-bar {
+            width: 100%;
+        }
+    }
+}
