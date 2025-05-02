@@ -2,34 +2,34 @@
   <div
       class="flex h-screen w-full bg-background"
   >
-    <div class="flex w-full gap-3 z-[100]">
-      <div class="basis-1/3 px-16">
+    <div class="flex w-full gap-3 z-[100] max-md:flex-wrap">
+      <div class="md:basis-1/3 px-10  md:px-16 w-full">
         <div class="pt-24">
           <!-- Profile Section -->
           <div class="w-full">
             <div
-                class="w-[180px] md:ml-auto h-[180px] border border-slate-200 rounded-full bg-[url(/img/profile-picture-salmanulfaris.jpg)] bg-contain ">
+                class="w-[180px] h-[180px] mr-auto md:ml-auto  border border-slate-200 rounded-full bg-[url(/img/profile-picture-salmanulfaris.jpg)] bg-contain ">
             </div>
-            <div class="mt-16">
+            <div class="mt-16 max-md:hidden">
               <ul>
-                <li class="hover:translate-x-1 ease-in hover:cursor-pointer my-3 transition-all">- Profile</li>
-                <li class="hover:translate-x-1 ease-in hover:cursor-pointer my-3 transition-all">- Skills</li>
-                <li class="hover:translate-x-1 ease-in hover:cursor-pointer my-3 transition-all">- Education</li>
+                <li @click="scrollToId('profile')" class="hover:translate-x-1 ease-in hover:cursor-pointer my-3 transition-all"><Icon icon="octicon:dash-16" class="inline-block" width="16" height="16" /> Profile</li>
+                <li @click="scrollToId('skills')" class="hover:translate-x-1 ease-in hover:cursor-pointer my-3 transition-all"><Icon icon="octicon:dash-16" class="inline-block" width="16" height="16" /> Skills</li>
+                <li @click="scrollToId('education')" class="hover:translate-x-1 ease-in hover:cursor-pointer my-3 transition-all"><Icon icon="octicon:dash-16" class="inline-block" width="16" height="16" /> Education</li>
               </ul>
             </div>
           </div>
         </div>
       </div>
-      <div class="basis-2/3 overflow-y-scroll pb-32">
-        <div class="px-24 pt-24">
+      <div class="md:basis-2/3 overflow-y-scroll pb-32">
+        <div class="md:px-24 px-10 md:pt-24 pt-8" id="profile">
           <h1>
             <LetterPullup
                 words="Salmanul Faris"
                 :delay="0.05"
-                class="text-7xl text-wrap font-black dark:text-white"
+                class="md:text-7xl text-3xl text-wrap font-black dark:text-white"
             />
           </h1>
-          <span class="text-gray-200 text-lg mt-4 ">Software Engineer | Data Scientist</span>
+          <span class="text-gray-200 md:text-lg mt-4 ">Software Engineer | Data Scientist</span>
           <div class="mt-4">
             <div v-for="social in socials"
                  class="border border-slate-200 hover:cursor-pointer inline-block mr-2 text-sm px-4 py-1 bg-gray-900 rounded-full">
@@ -41,18 +41,18 @@
             </div>
           </div>
 
-          <p class="font-medium mt-10 leading-6">
+          <p class="font-medium max-md:text-sm mt-10 leading-6">
             {{ bio }}
           </p>
 
-          <div class="mt-20 ">
-            <h3 class="font-black text-4xl tracking-tight">Skills</h3>
+          <div class="mt-20 scroll-pt-24" id="skills">
+            <h3 class="font-black text-2xl  md:text-4xl tracking-tight" >Skills</h3>
             <div class="ml-1">
 
               <div v-for="skill_set in skills" class="mb-5">
                 <p class="text-slate-200 my-2">{{ skill_set.name }}</p>
                 <div v-for="sk in skill_set.skills"
-                     :class="'inline-block font-medium mr-2 px-3 py-0.5 border border-slate-500 text-xs rounded-full  '+'bg-'+skill_set.color+'-400/10'"
+                     :class="'inline-block mb-1 font-medium mr-2 px-3 py-0.5 border border-slate-500 text-xs rounded-full  '+'bg-'+skill_set.color+'-400/10'"
                 >
 
                   {{ sk }}
@@ -63,16 +63,16 @@
           </div>
 
 
-          <div class="mt-20">
-            <h3 class="font-black text-4xl tracking-tight">Education</h3>
+          <div class="mt-20" id="education">
+            <h3 class="font-black text-2xl md:text-4xl tracking-tight">Education</h3>
             <div v-for="education in educations" class="mt-5">
               <div class="flex justify-between mt-2">
                 <p class="text-slate-400 text-sm pb-0">{{ education.university }}</p>
-                <span class="text-slate-200">
+                <span class="text-slate-200 text-end max-md:text-xs">
                   {{ education.year }}
                 </span>
               </div>
-              <p class="text-lg font-medium">{{ education.subject }}</p>
+              <p class="md:text-lg  font-medium">{{ education.subject }}</p>
             </div>
           </div>
 
@@ -174,5 +174,14 @@ const educations = [
 
 const bio = "I'm Salmanul Faris — a Software Engineer and Data Scientist with 5+ years of experience building full-stack web apps and solving real-world problems with data. I work with tools like Laravel, Vue, Python, and Langchain, and I’m currently pursuing the IIT Madras BS degree in Data Science. I enjoy crafting scalable solutions that merge solid engineering with data-driven insights.";
 
+
+const scrollToId = ( id:string)=> {
+  const element = document.getElementById(id);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else {
+    console.warn(`Element with id "${id}" not found.`);
+  }
+}
 const isDark = computed(() => useColorMode().value == "dark");
 </script>
