@@ -1,7 +1,7 @@
 ---
 title: "Importing large CSV files in Laravel without running out of memory"
 description: "Streaming, chunked inserts and queued jobs: a practical approach to importing millions of rows in Laravel."
-date: 2026-10-16
+date: 2026-10-15
 tags: [laravel, php, performance]
 cover: ./cover.jpg
 coverAlt: "A CSV file being converted into database rows"
