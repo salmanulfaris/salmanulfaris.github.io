@@ -16,13 +16,105 @@ const years = [...new Set(posts.map((p) => p.data.date.getFullYear()))]
   {posts.length === 0 && <p class="mt-12 text-muted">Nothing here yet.</p>}
 
   {
-    years.map((year) => (
-      <section class="mt-12">
-        <h2 class="text-sm font-medium text-muted">{year}</h2>
-        <div class="mt-2">
-          <PostList posts={posts.filter((p) => p.data.date.getFullYear() === year)} />
-        </div>
-      </section>
-    ))
+    posts.length > 0 && (
+      <div class="relative mt-10">
+        <svg
+          class="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <circle cx="11" cy="11" r="7" />
+          <path d="m20 20-3.5-3.5" />
+        </svg>
+        <input
+          id="post-search"
+          type="search"
+          placeholder="Search posts"
+          aria-label="Search posts"
+          autocomplete="off"
+          class="w-full rounded-lg border border-line bg-bg py-2 pr-10 pl-9 text-sm placeholder:text-muted focus:border-muted focus:outline-none"
+        />
+        <kbd class="pointer-events-none absolute top-1/2 right-3 hidden -translate-y-1/2 rounded border border-line px-1.5 font-sans text-xs text-muted sm:block">
+          /
+        </kbd>
+      </div>
+    )
   }
+
+  <div id="post-groups">
+    {
+      years.map((year) => (
+        <section class="mt-12" data-year-group>
+          <h2 class="text-sm font-medium text-muted">{year}</h2>
+          <div class="mt-2">
+            <PostList posts={posts.filter((p) => p.data.date.getFullYear() === year)} />
+          </div>
+        </section>
+      ))
+    }
+  </div>
+
+  <p id="no-results" class="mt-12 hidden text-muted">No posts match your search.</p>
 </BaseLayout>
+
+<script>
+  const input = document.getElementById('post-search') as HTMLInputElement | null
+  const noResults = document.getElementById('no-results')
+  const groups = document.querySelectorAll<HTMLElement>('[data-year-group]')
+
+  function filter(query: string) {
+    const words = query.toLowerCase().split(/\s+/).filter(Boolean)
+    let total = 0
+
+    groups.forEach((group) => {
+      let visible = 0
+      group.querySelectorAll<HTMLElement>('li[data-search]').forEach((item) => {
+        const text = item.dataset.search ?? ''
+        const match = words.every((word) => text.includes(word))
+        item.hidden = !match
+        if (match) visible++
+      })
+      group.hidden = visible === 0
+      total += visible
+    })
+
+    noResults?.classList.toggle('hidden', total > 0)
+
+    // Keep the search in the URL so results can be shared or survive a reload
+    const url = new URL(location.href)
+    if (query) url.searchParams.set('q', query)
+    else url.searchParams.delete('q')
+    history.replaceState(null, '', url)
+  }
+
+  if (input) {
+    const initial = new URLSearchParams(location.search).get('q')
+    if (initial) {
+      input.value = initial
+      filter(initial)
+    }
+
+    input.addEventListener('input', () => filter(input.value.trim()))
+
+    // Press "/" anywhere to jump to search, Escape to clear it
+    document.addEventListener('keydown', (e) => {
+      const target = e.target as HTMLElement
+      if (e.key === '/' && !['INPUT', 'TEXTAREA'].includes(target.tagName)) {
+        e.preventDefault()
+        input.focus()
+      }
+    })
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        input.value = ''
+        filter('')
+        input.blur()
+      }
+    })
+  }
+</script>

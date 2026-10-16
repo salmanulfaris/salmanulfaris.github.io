@@ -36,6 +36,8 @@ npm run dev        # http://localhost:4321
    ```
 
 3. Write in Markdown below it. Other images can sit in the same folder: `![Alt text](./diagram.png)`.
+   Posts are listed newest first by `date`. To order two posts on the same day, add a time:
+   `date: 2026-10-16T18:30`.
 4. Preview with `npm run dev` (drafts are visible locally but not on the live site).
 5. Commit and push to the `src` branch. GitHub Actions builds and deploys automatically.
 

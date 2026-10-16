@@ -1,9 +1,11 @@
 import { getCollection } from 'astro:content'
 
 // Published posts, newest first. Drafts show up in `npm run dev` only.
+// Posts on the same date sort by time if one is given (`date: 2026-10-16T18:30`),
+// then by id so the order is stable between builds.
 export async function getPosts() {
   const posts = await getCollection('blog', ({ data }) => import.meta.env.DEV || !data.draft)
-  return posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  return posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf() || a.id.localeCompare(b.id))
 }
 
 export function formatDate(date: Date) {

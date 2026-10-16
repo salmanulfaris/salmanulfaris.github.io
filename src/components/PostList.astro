@@ -13,7 +13,7 @@ const { posts } = Astro.props
 <ul class="divide-y divide-line">
   {
     posts.map((post) => (
-      <li>
+      <li data-search={[post.data.title, post.data.description, ...post.data.tags].join(' ').toLowerCase()}>
         <a href={`/blog/${post.id}/`} class="group flex items-center gap-4 py-4">
           {post.data.cover && (
             <Image
