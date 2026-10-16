@@ -56,3 +56,18 @@ const { Content } = await render(post)
 
   <a href="/blog/" class="mt-12 inline-block text-sm text-muted transition-colors hover:text-fg">← All posts</a>
 </BaseLayout>
+
+<script>
+  // Copy buttons on API request blocks
+  document.querySelectorAll<HTMLButtonElement>('.api-copy').forEach((button) => {
+    button.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(button.dataset.copy ?? '')
+        button.textContent = 'Copied'
+      } catch {
+        button.textContent = 'Failed'
+      }
+      setTimeout(() => (button.textContent = 'Copy'), 1500)
+    })
+  })
+</script>

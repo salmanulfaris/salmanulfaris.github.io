@@ -48,6 +48,38 @@ just its title and date, and link previews use the profile photo.
 
 See `src/content/blog/importing-large-csv-files-in-laravel/` for a full example.
 
+## API requests and code blocks
+
+Write an API request as a fenced block with the language `api`, like a raw HTTP request:
+the method and full URL on the first line, optional headers, a blank line, then an optional body.
+
+````md
+```api
+POST https://{gateway-host}/api/rest/version/100/merchant/{merchantId}/session
+Authorization: Basic base64(merchant.{merchantId}:{apiPassword})
+Content-Type: application/json
+
+{
+    "apiOperation": "INITIATE_CHECKOUT"
+}
+```
+````
+
+It renders as a card with a colored method badge, the URL (base URL muted, `{params}` highlighted,
+copy button), the headers and the highlighted body. A `GET` with no body is just the first line
+(plus headers if you want).
+
+Add a caption to any code block with `title="..."`, handy for responses:
+
+````md
+```json title="Response"
+{ "result": "SUCCESS" }
+```
+````
+
+The `api` blocks and titles come from `src/lib/remark-api-blocks.mjs`; styles are at the end of
+`src/styles/global.css`.
+
 ## Project layout
 
 ```
