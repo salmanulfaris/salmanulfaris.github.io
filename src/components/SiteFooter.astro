@@ -1,0 +1,17 @@
+---
+import { SOCIALS } from '@/consts'
+---
+
+<footer class="flex flex-wrap items-center justify-between gap-4 border-t border-line py-8 text-sm text-muted">
+  <span>© {new Date().getFullYear()} Salmanul Faris</span>
+  <nav class="flex gap-5">
+    {
+      SOCIALS.map(({ label, href }) => (
+        <a href={href} target="_blank" rel="noopener" class="transition-colors hover:text-fg">
+          {label}
+        </a>
+      ))
+    }
+    <a href="/rss.xml" class="transition-colors hover:text-fg">RSS</a>
+  </nav>
+</footer>

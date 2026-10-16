@@ -1,7 +1,6 @@
 ---
 import { render } from 'astro:content'
 import BaseLayout from '@/layouts/BaseLayout.astro'
-import SiteHeader from '@/components/SiteHeader.astro'
 import { getPosts, formatDate, readingTime } from '@/lib/posts'
 
 export async function getStaticPaths() {
@@ -15,38 +14,31 @@ const { Content } = await render(post)
 ---
 
 <BaseLayout title={title} description={description} type="article">
-  <SiteHeader />
-  <main class="mx-auto max-w-3xl px-6 pb-32">
-    <article>
-      <header class="mt-8 border-b border-slate-800 pb-8">
-        <div class="flex flex-wrap items-center gap-2 text-sm text-slate-400">
-          <time datetime={date.toISOString()}>{formatDate(date)}</time>
-          <span>·</span>
-          <span>{readingTime(post.body)}</span>
-          {updated && <span>· Updated {formatDate(updated)}</span>}
-        </div>
-        <h1 class="mt-3 text-3xl font-black tracking-tight md:text-5xl">{title}</h1>
-        <p class="mt-4 text-lg text-slate-300">{description}</p>
-        {
-          tags.length > 0 && (
-            <div class="mt-5 flex flex-wrap gap-2">
-              {tags.map((tag) => (
-                <span class="rounded-full border border-slate-600 px-3 py-0.5 text-xs">{tag}</span>
-              ))}
-            </div>
-          )
-        }
-      </header>
+  <article class="pt-8">
+    <header>
+      <h1 class="text-3xl font-semibold leading-tight tracking-tight text-balance">{title}</h1>
+      <p class="mt-3 text-sm text-muted">
+        <time datetime={date.toISOString()}>{formatDate(date)}</time>
+        <span class="mx-1.5">·</span>
+        {readingTime(post.body)}
+        {updated && <span> · Updated {formatDate(updated)}</span>}
+      </p>
+    </header>
 
-      <div
-        class="prose prose-invert mt-10 max-w-none prose-headings:tracking-tight prose-a:text-cyan-300 prose-pre:border prose-pre:border-slate-800 prose-img:rounded-xl prose-code:before:content-none prose-code:after:content-none prose-code:rounded prose-code:bg-white/10 prose-code:px-1.5 prose-code:py-0.5 prose-code:font-normal"
-      >
-        <Content />
-      </div>
-    </article>
+    <div
+      class="prose mt-10 max-w-none leading-7 prose-headings:font-semibold prose-headings:tracking-tight prose-h2:mt-12 prose-h2:text-xl prose-h3:text-lg prose-a:underline-offset-4 prose-a:decoration-line hover:prose-a:decoration-current prose-blockquote:font-normal prose-blockquote:not-italic prose-blockquote:text-muted prose-code:font-normal prose-code:before:content-none prose-code:after:content-none prose-pre:rounded-lg prose-pre:border prose-pre:border-line prose-pre:text-[13px] prose-img:rounded-lg [&_:not(pre)>code]:rounded [&_:not(pre)>code]:bg-subtle [&_:not(pre)>code]:px-1.5 [&_:not(pre)>code]:py-0.5 [&_:not(pre)>code]:text-[0.875em]"
+    >
+      <Content />
+    </div>
 
-    <a href="/blog/" class="mt-16 inline-block text-sm text-slate-400 transition-colors hover:text-white">
-      ← All posts
-    </a>
-  </main>
+    {
+      tags.length > 0 && (
+        <p class="mt-12 text-sm text-muted">
+          Tagged {tags.map((tag, i) => <>{i > 0 && ', '}<span class="text-fg">{tag}</span></>)}
+        </p>
+      )
+    }
+  </article>
+
+  <a href="/blog/" class="mt-12 inline-block text-sm text-muted transition-colors hover:text-fg">← All posts</a>
 </BaseLayout>

@@ -1,20 +1,28 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro'
-import SiteHeader from '@/components/SiteHeader.astro'
-import PostCard from '@/components/PostCard.astro'
+import PostList from '@/components/PostList.astro'
 import { getPosts } from '@/lib/posts'
 
 const posts = await getPosts()
+
+// Group posts by year, newest year first
+const years = [...new Set(posts.map((p) => p.data.date.getFullYear()))]
 ---
 
 <BaseLayout title="Blog" description="Notes and articles by Salmanul Faris.">
-  <SiteHeader />
-  <main class="mx-auto max-w-3xl px-6 pb-32">
-    <h1 class="mt-8 text-4xl font-black tracking-tight md:text-6xl">Blog</h1>
-    <p class="mt-4 text-slate-300">Notes on software engineering, data science and things I'm learning.</p>
+  <h1 class="pt-8 text-2xl font-semibold tracking-tight">Blog</h1>
+  <p class="mt-1 text-muted">Notes on software engineering, data science and things I'm learning.</p>
 
-    <div class="mt-12">
-      {posts.length === 0 ? <p class="text-slate-400">No posts yet.</p> : posts.map((post) => <PostCard post={post} />)}
-    </div>
-  </main>
+  {posts.length === 0 && <p class="mt-12 text-muted">Nothing here yet.</p>}
+
+  {
+    years.map((year) => (
+      <section class="mt-12">
+        <h2 class="text-sm font-medium text-muted">{year}</h2>
+        <div class="mt-2">
+          <PostList posts={posts.filter((p) => p.data.date.getFullYear() === year)} />
+        </div>
+      </section>
+    ))
+  }
 </BaseLayout>

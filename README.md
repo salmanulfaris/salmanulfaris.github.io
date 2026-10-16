@@ -1,6 +1,6 @@
 # salmanulfaris.github.io
 
-Personal site and blog, built with [Astro](https://astro.build) + Vue + Tailwind.
+Personal site and blog, built with [Astro](https://astro.build) and Tailwind.
 
 ## Run locally
 
@@ -28,7 +28,7 @@ npm run dev        # http://localhost:4321
 4. Preview with `npm run dev` (drafts are visible locally but not on the live site).
 5. Commit and push to the `src` branch. GitHub Actions builds and deploys automatically.
 
-See `src/content/blog/hello-world.md` for a full example.
+See `src/content/blog/importing-large-csv-files-in-laravel.md` for a full example.
 
 ## Project layout
 
@@ -37,7 +37,7 @@ src/
   content/blog/        blog posts (Markdown)
   pages/               routes: /, /blog/, /blog/[slug]/, /rss.xml
   layouts/             page shell, SEO meta tags
-  components/app/      portfolio sections (Vue)
-  components/ui/       UI components (Vue)
+  components/          header, footer, post list
+  styles/global.css    colors, font, light/dark theme
 public/                static files served as-is
 ```
