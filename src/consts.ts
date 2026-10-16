@@ -1,6 +1,6 @@
 export const SITE_TITLE = 'Salmanul Faris'
 export const SITE_DESCRIPTION =
-  'Software Engineer and Data Scientist. Writing about Laravel, Vue, Python, data science and AI.'
+  'Software developer in Kuwait, focused on FinTech and payment systems. Writing about payments, Laravel, APIs and AI.'
 
 export const SOCIALS = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/salmanulfarisk' },
