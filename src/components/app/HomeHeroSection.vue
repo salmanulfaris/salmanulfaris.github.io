@@ -15,6 +15,7 @@
                 <li @click="scrollToId('profile')" class="hover:translate-x-1 ease-in hover:cursor-pointer my-3 transition-all"><Icon icon="octicon:dash-16" class="inline-block" width="16" height="16" /> Profile</li>
                 <li @click="scrollToId('skills')" class="hover:translate-x-1 ease-in hover:cursor-pointer my-3 transition-all"><Icon icon="octicon:dash-16" class="inline-block" width="16" height="16" /> Skills</li>
                 <li @click="scrollToId('education')" class="hover:translate-x-1 ease-in hover:cursor-pointer my-3 transition-all"><Icon icon="octicon:dash-16" class="inline-block" width="16" height="16" /> Education</li>
+                <li class="hover:translate-x-1 ease-in my-3 transition-all"><a href="/blog/"><Icon icon="octicon:dash-16" class="inline-block" width="16" height="16" /> Blog</a></li>
               </ul>
             </div>
           </div>
@@ -33,7 +34,7 @@
           <div class="mt-4">
             <div v-for="social in socials"
                  class="border border-slate-200 hover:cursor-pointer inline-block mr-2 text-sm px-4 py-1 bg-gray-900 rounded-full">
-              <a :href="social.link" target="_blank">
+              <a :href="social.link" :target="social.link.startsWith('http') ? '_blank' : undefined">
 
                 <Icon class="inline-block mr-1" :icon="social.icon"/>
                 {{ social.title }}
@@ -131,6 +132,11 @@ const skills = [
 ]
 
 const socials = [
+  {
+    'title': 'Blog',
+    'link': '/blog/',
+    'icon': 'line-md:document-list'
+  },
   {
     'title': 'Linkedin',
     'link': 'https://www.linkedin.com/in/salmanulfarisk',

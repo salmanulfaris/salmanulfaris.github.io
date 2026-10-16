@@ -1,5 +1,43 @@
-# Vue 3 + TypeScript + Vite
+# salmanulfaris.github.io
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Personal site and blog, built with [Astro](https://astro.build) + Vue + Tailwind.
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+## Run locally
+
+```sh
+npm install
+npm run dev        # http://localhost:4321
+```
+
+## Write a post
+
+1. Create `src/content/blog/my-post-title.md` (the file name becomes the URL: `/blog/my-post-title/`).
+2. Add front matter at the top:
+
+   ```md
+   ---
+   title: "My post title"
+   description: "One-line summary shown in lists and link previews."
+   date: 2026-10-16
+   tags: [laravel, vue]
+   draft: true      # remove or set to false to publish
+   ---
+   ```
+
+3. Write in Markdown below it. Images go in `public/img/blog/` and are referenced as `/img/blog/name.png`.
+4. Preview with `npm run dev` (drafts are visible locally but not on the live site).
+5. Commit and push to the `src` branch. GitHub Actions builds and deploys automatically.
+
+See `src/content/blog/hello-world.md` for a full example.
+
+## Project layout
+
+```
+src/
+  content/blog/        blog posts (Markdown)
+  pages/               routes: /, /blog/, /blog/[slug]/, /rss.xml
+  layouts/             page shell, SEO meta tags
+  components/app/      portfolio sections (Vue)
+  components/ui/       UI components (Vue)
+public/                static files served as-is
+```

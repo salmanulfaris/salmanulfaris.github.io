@@ -1,0 +1,33 @@
+---
+const path = Astro.url.pathname
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/blog/', label: 'Blog' },
+]
+---
+
+<header class="mx-auto flex max-w-3xl items-center justify-between px-6 py-8">
+  <a href="/" class="flex items-center gap-3 font-black tracking-tight">
+    <img
+      src="/img/profile-picture-salmanulfaris.jpg"
+      alt=""
+      width="36"
+      height="36"
+      class="size-9 rounded-full border border-slate-200 object-cover"
+    />
+    Salmanul Faris
+  </a>
+  <nav class="flex gap-6 text-sm">
+    {
+      links.map(({ href, label }) => {
+        const active = href === '/' ? path === '/' : path.startsWith(href)
+        return (
+          <a href={href} class:list={['transition-colors hover:text-white', active ? 'text-white' : 'text-slate-400']}>
+            {label}
+          </a>
+        )
+      })
+    }
+    <a href="/rss.xml" class="text-slate-400 transition-colors hover:text-white">RSS</a>
+  </nav>
+</header>
