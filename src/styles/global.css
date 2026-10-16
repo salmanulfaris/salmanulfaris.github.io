@@ -21,15 +21,14 @@
   color-scheme: light;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0a0a0a;
-    --fg: #ededed;
-    --muted: #8f8f8f;
-    --subtle: #171717;
-    --line: #262626;
-    color-scheme: dark;
-  }
+/* Dark theme: set by the toggle, or by the system preference on first visit */
+:root[data-theme="dark"] {
+  --bg: #0a0a0a;
+  --fg: #ededed;
+  --muted: #8f8f8f;
+  --subtle: #171717;
+  --line: #262626;
+  color-scheme: dark;
 }
 
 @layer base {
@@ -47,13 +46,11 @@
   }
 }
 
-/* Shiki dual themes: light by default, dark when the system is dark */
-@media (prefers-color-scheme: dark) {
-  .astro-code,
-  .astro-code span {
-    color: var(--shiki-dark) !important;
-    background-color: var(--shiki-dark-bg) !important;
-  }
+/* Shiki dual themes: light by default, dark in dark theme */
+[data-theme="dark"] .astro-code,
+[data-theme="dark"] .astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
 }
 
 .prose {

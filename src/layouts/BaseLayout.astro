@@ -37,6 +37,20 @@ const image = new URL('/img/profile-picture-salmanulfaris.jpg', Astro.site)
     <meta property="og:image" content={image} />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@salman_faris_1" />
+
+    <!-- Set the theme before first paint to avoid a flash of the wrong colors -->
+    <script is:inline>
+      ;(function () {
+        let theme
+        try {
+          theme = localStorage.getItem('theme')
+        } catch {}
+        if (theme !== 'light' && theme !== 'dark') {
+          theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+        }
+        document.documentElement.dataset.theme = theme
+      })()
+    </script>
   </head>
   <body>
     <div class="mx-auto flex min-h-dvh max-w-2xl flex-col px-6">

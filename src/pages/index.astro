@@ -52,13 +52,6 @@ const experience = [
     ],
   },
 ]
-
-const education = [
-  { subject: 'BS in Data Science and Applications', school: 'IIT Madras', year: '2021 – Present' },
-  { subject: 'Diploma in Programming', school: 'IIT Madras', year: '2024' },
-  { subject: 'Diploma in Data Science', school: 'IIT Madras', year: '2023' },
-  { subject: 'Diploma in Electronics and Communication', school: 'M-DIT Polytechnic College, Kerala', year: '2017 – 2020' },
-]
 ---
 
 <BaseLayout>
@@ -141,22 +134,5 @@ const education = [
         ))
       }
     </dl>
-  </section>
-
-  <section class="mt-20">
-    <h2 class="text-sm font-medium text-muted">Education</h2>
-    <ul class="mt-4 space-y-5">
-      {
-        education.map((e) => (
-          <li class="flex items-baseline justify-between gap-6">
-            <div>
-              <p>{e.subject}</p>
-              <p class="text-sm text-muted">{e.school}</p>
-            </div>
-            <span class="shrink-0 text-sm tabular-nums text-muted">{e.year}</span>
-          </li>
-        ))
-      }
-    </ul>
   </section>
 </BaseLayout>

@@ -1,4 +1,6 @@
 ---
+import ThemeToggle from '@/components/ThemeToggle.astro'
+
 const path = Astro.url.pathname
 const links = [
   { href: '/', label: 'About' },
@@ -8,7 +10,7 @@ const links = [
 
 <header class="flex items-center justify-between py-10 text-sm">
   <a href="/" class="font-medium">Salmanul Faris</a>
-  <nav class="flex gap-6">
+  <nav class="flex items-center gap-6">
     {
       links.map(({ href, label }) => {
         const active = href === '/' ? path === '/' : path.startsWith(href)
@@ -23,5 +25,6 @@ const links = [
         )
       })
     }
+    <ThemeToggle />
   </nav>
 </header>
