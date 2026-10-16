@@ -15,7 +15,7 @@ const { posts } = Astro.props
     posts.map((post) => (
       <li>
         <a href={`/blog/${post.id}/`} class="group flex items-center gap-4 py-4">
-          {post.data.cover ? (
+          {post.data.cover && (
             <Image
               src={post.data.cover}
               alt=""
@@ -23,8 +23,6 @@ const { posts } = Astro.props
               height={106}
               class="aspect-[3/2] w-20 shrink-0 rounded-md border border-line object-cover"
             />
-          ) : (
-            <div class="aspect-[3/2] w-20 shrink-0 rounded-md border border-line bg-subtle" aria-hidden="true" />
           )}
           <div class="flex min-w-0 flex-1 flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
             <span class="underline-offset-4 group-hover:underline">

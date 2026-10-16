@@ -41,7 +41,8 @@ npm run dev        # http://localhost:4321
 
 **Covers:** any size works; 1200×630 is ideal (it's the link-preview size). Images are resized and
 converted to WebP at build time. The cover shows as a thumbnail in post lists, at the top of the post,
-and as the preview image when the post is shared. Posts without a cover show a blank placeholder.
+and as the preview image when the post is shared. Covers are optional: without one, the post shows
+just its title and date, and link previews use the profile photo.
 
 See `src/content/blog/importing-large-csv-files-in-laravel/` for a full example.
 
