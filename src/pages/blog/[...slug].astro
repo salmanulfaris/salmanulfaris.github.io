@@ -1,5 +1,6 @@
 ---
 import { render } from 'astro:content'
+import { Image } from 'astro:assets'
 import BaseLayout from '@/layouts/BaseLayout.astro'
 import { getPosts, formatDate, readingTime } from '@/lib/posts'
 
@@ -9,11 +10,11 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props
-const { title, description, date, updated, tags } = post.data
+const { title, description, date, updated, tags, cover, coverAlt } = post.data
 const { Content } = await render(post)
 ---
 
-<BaseLayout title={title} description={description} type="article">
+<BaseLayout title={title} description={description} type="article" image={cover}>
   <article class="pt-8">
     <header>
       <h1 class="text-3xl font-semibold leading-tight tracking-tight text-balance">{title}</h1>
@@ -24,6 +25,19 @@ const { Content } = await render(post)
         {updated && <span> · Updated {formatDate(updated)}</span>}
       </p>
     </header>
+
+    {
+      cover && (
+        <Image
+          src={cover}
+          alt={coverAlt}
+          widths={[672, 1344]}
+          sizes="(min-width: 720px) 672px, 100vw"
+          loading="eager"
+          class="mt-8 aspect-[1200/630] w-full rounded-lg border border-line object-cover"
+        />
+      )
+    }
 
     <div
       class="prose mt-10 max-w-none leading-7 prose-headings:font-semibold prose-headings:tracking-tight prose-h2:mt-12 prose-h2:text-xl prose-h3:text-lg prose-a:underline-offset-4 prose-a:decoration-line hover:prose-a:decoration-current prose-blockquote:font-normal prose-blockquote:not-italic prose-blockquote:text-muted prose-code:font-normal prose-code:before:content-none prose-code:after:content-none prose-pre:rounded-lg prose-pre:border prose-pre:border-line prose-pre:text-[13px] prose-img:rounded-lg [&_:not(pre)>code]:rounded [&_:not(pre)>code]:bg-subtle [&_:not(pre)>code]:px-1.5 [&_:not(pre)>code]:py-0.5 [&_:not(pre)>code]:text-[0.875em]"

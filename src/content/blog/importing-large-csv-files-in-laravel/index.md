@@ -3,6 +3,8 @@ title: "Importing large CSV files in Laravel without running out of memory"
 description: "Streaming, chunked inserts and queued jobs: a practical approach to importing millions of rows in Laravel."
 date: 2026-10-16
 tags: [laravel, php, performance]
+cover: ./cover.jpg
+coverAlt: "A CSV file being converted into database rows"
 ---
 
 Sooner or later every Laravel app gets a feature request that sounds simple: *"Can users upload a CSV?"* It works fine with a 200-row test file. Then someone uploads 2 million rows and the request dies with `Allowed memory size exhausted`.

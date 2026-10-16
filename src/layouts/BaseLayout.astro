@@ -1,5 +1,7 @@
 ---
 import '@fontsource-variable/inter'
+import { getImage } from 'astro:assets'
+import type { ImageMetadata } from 'astro'
 import '@/styles/global.css'
 import SiteHeader from '@/components/SiteHeader.astro'
 import SiteFooter from '@/components/SiteFooter.astro'
@@ -9,12 +11,16 @@ interface Props {
   title?: string
   description?: string
   type?: 'website' | 'article'
+  image?: ImageMetadata
 }
 
-const { title, description = SITE_DESCRIPTION, type = 'website' } = Astro.props
+const { title, description = SITE_DESCRIPTION, type = 'website', image } = Astro.props
 const pageTitle = title ? `${title} · ${SITE_TITLE}` : SITE_TITLE
 const canonical = new URL(Astro.url.pathname, Astro.site)
-const image = new URL('/img/profile-picture-salmanulfaris.jpg', Astro.site)
+// Link-preview image: the post's cover (as a 1200px JPEG, which every platform supports) or the profile photo
+const ogImage = image
+  ? new URL((await getImage({ src: image, width: 1200, format: 'jpg' })).src, Astro.site)
+  : new URL('/img/profile-picture-salmanulfaris.jpg', Astro.site)
 ---
 
 <!doctype html>
@@ -34,8 +40,8 @@ const image = new URL('/img/profile-picture-salmanulfaris.jpg', Astro.site)
     <meta property="og:url" content={canonical} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={image} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
     <meta name="twitter:site" content="@salman_faris_1" />
 
     <!-- Set the theme before first paint to avoid a flash of the wrong colors -->
