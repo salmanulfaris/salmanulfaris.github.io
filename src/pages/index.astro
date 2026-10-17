@@ -6,14 +6,6 @@ import { SOCIALS } from '@/consts'
 
 const posts = (await getPosts()).slice(0, 5)
 
-const skills = [
-  { name: 'Languages', items: ['PHP', 'JavaScript', 'TypeScript', 'Python', 'Java', 'SQL', 'Bash', 'HTML', 'CSS'] },
-  { name: 'Frameworks', items: ['Laravel', 'CodeIgniter', 'Flask', 'Vue.js', 'Nuxt', 'Inertia.js', 'LangGraph', 'scikit-learn', 'Pandas'] },
-  { name: 'Databases', items: ['MySQL', 'PostgreSQL', 'SQL Server', 'SQLite', 'Firebase'] },
-  { name: 'Cloud & tools', items: ['DigitalOcean', 'Microsoft Azure', 'Linux', 'Git', 'GitHub', 'npm', 'ONNX Runtime'] },
-  { name: 'Practices', items: ['RESTful API design', 'SDK development', 'Third-party integrations', 'Payment security and tokenization', 'LLM and AI integration', 'Automated testing and debugging'] },
-]
-
 const projects = [
   {
     name: 'QuizPractice.space',
@@ -194,19 +186,5 @@ const experience = [
         ))
       }
     </ol>
-  </section>
-
-  <section class="mt-20">
-    <h2 class="text-sm font-medium text-muted">Skills</h2>
-    <dl class="mt-4 space-y-3">
-      {
-        skills.map((group) => (
-          <div class="grid gap-1 sm:grid-cols-[8rem_1fr] sm:gap-4">
-            <dt class="text-sm text-muted">{group.name}</dt>
-            <dd>{group.items.join(', ')}</dd>
-          </div>
-        ))
-      }
-    </dl>
   </section>
 </BaseLayout>
