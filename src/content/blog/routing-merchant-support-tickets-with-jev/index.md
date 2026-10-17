@@ -7,7 +7,7 @@ cover: ./cover.png
 coverAlt: "Merchant tickets routed to different departments"
 ---
 
-As a payment facilitator, we have a lot of merchants, and every merchant has different questions.
+A payment facilitator usually has a lot of merchants, and they will have different questions.
 Some are for sales, some are for IT support, some are for operations and some are for finance.
 
 Reading every email and forwarding it to the right team takes time. So, in this post I will show an idea to do this routing automatically with **Jev**, a classification model from TypeSafe AI, using LangChain.
@@ -41,13 +41,13 @@ Jev supports three types of questions:
 
 All questions in one request are evaluated in parallel, so asking three questions is almost the same speed as asking one.
 
-That is exactly what we need for ticket routing.
+That is exactly what is needed for ticket routing.
 
 ## How it works
 
 1. A merchant sends an email or creates a ticket.
-2. We send the email text to Jev with a few questions: which category, is it urgent, and how severe is it.
-3. Based on the answer, we assign the ticket to a department.
+2. The email text is sent to Jev with a few questions: which category, is it urgent, and how severe is it.
+3. Based on the answer, the ticket is assigned to a department.
 4. If Jev is not confident, the ticket goes to a person for manual triage.
 
 So, let's go step by step.
