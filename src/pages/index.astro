@@ -14,6 +14,46 @@ const skills = [
   { name: 'Practices', items: ['RESTful API design', 'SDK development', 'Third-party integrations', 'Payment security and tokenization', 'LLM and AI integration', 'Automated testing and debugging'] },
 ]
 
+const projects = [
+  {
+    name: 'QuizPractice.space',
+    tagline: 'Exam practice platform',
+    links: [{ label: 'quizpractice.space', href: 'https://quizpractice.space' }],
+    stack: ['Laravel', 'Vue 3', 'Inertia.js', 'MySQL', 'Python', 'Linux'],
+    points: [
+      'A web app for IIT Madras BS students to practice past question papers in an exam-like setup, with question data extracted from PDFs automatically.',
+      'Grew to 15,000+ users and 1 million+ site visits.',
+      'Added a discussion panel and community solutions, contributed by students or an AI bot, plus LLM-based content generation.',
+    ],
+  },
+  {
+    name: 'sql-mcp',
+    tagline: 'MCP server for AI agents',
+    links: [
+      { label: 'GitHub', href: 'https://github.com/salmanulfaris/sql-mcp' },
+      { label: 'npm', href: 'https://www.npmjs.com/package/@salmanulfaris/sql-mcp' },
+    ],
+    stack: ['TypeScript', 'Node.js', 'MySQL', 'PostgreSQL', 'SQL Server', 'SQLite'],
+    points: [
+      'An open-source MCP server that connects AI agents like Claude Desktop, Cursor and Windsurf directly to a live database.',
+      'Gives agents real schema and data access, with read-only mode by default and an explicit opt-in for write operations.',
+      'Published on npm and runs with zero install through npx.',
+    ],
+  },
+  {
+    name: 'easyresize.photos',
+    tagline: 'AI photo specification tool',
+    links: [{ label: 'easyresize.photos', href: 'https://easyresize.photos' }],
+    stack: ['Nuxt 4', 'TypeScript', 'LangGraph', 'ONNX Runtime', 'SQLite'],
+    points: [
+      'A full-stack web app that turns a plain request like “passport photo for my UAE visa” into a correctly sized and formatted image.',
+      'An agentic AI loop (LangGraph ReAct) that can switch between Anthropic and Mistral models. Every result is checked by separate code, so failed requirements trigger an automatic retry.',
+      'Privacy-first: the model only receives measured properties like size, format and DPI, never the image itself unless the user allows it.',
+      'Background removal (U²-Net) and face detection (YuNet) run on device with ONNX Runtime instead of external APIs.',
+    ],
+  },
+]
+
 const experience = [
   {
     role: 'Software Developer',
@@ -98,6 +138,40 @@ const experience = [
     <div class="mt-2">
       {posts.length > 0 ? <PostList posts={posts} /> : <p class="py-4 text-muted">Nothing here yet.</p>}
     </div>
+  </section>
+
+  <section class="mt-20">
+    <h2 class="text-sm font-medium text-muted">Projects</h2>
+    <ol class="mt-4 space-y-10">
+      {
+        projects.map((project) => (
+          <li>
+            <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+              <p>
+                <span class="font-medium">{project.name}</span>
+                <span class="text-muted"> · {project.tagline}</span>
+              </p>
+              <span class="flex gap-4 text-sm">
+                {project.links.map((link) => (
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener"
+                    class="text-muted underline decoration-line underline-offset-4 transition-colors hover:text-fg hover:decoration-fg"
+                  >
+                    {link.label} ↗
+                  </a>
+                ))}
+              </span>
+            </div>
+            <p class="text-sm text-muted">{project.stack.join(' · ')}</p>
+            <ul class="mt-3 list-disc space-y-1.5 pl-5 leading-7 marker:text-muted">
+              {project.points.map((point) => <li>{point}</li>)}
+            </ul>
+          </li>
+        ))
+      }
+    </ol>
   </section>
 
   <section class="mt-20">
