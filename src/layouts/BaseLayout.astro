@@ -57,6 +57,23 @@ const ogImage = image
         document.documentElement.dataset.theme = theme
       })()
     </script>
+
+    <!-- Google Analytics, production builds only so local visits aren't counted -->
+    {
+      import.meta.env.PROD && (
+        <>
+          <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-3QEF5JX4GE" />
+          <script is:inline>
+            window.dataLayer = window.dataLayer || []
+            function gtag() {
+              dataLayer.push(arguments)
+            }
+            gtag('js', new Date())
+            gtag('config', 'G-3QEF5JX4GE')
+          </script>
+        </>
+      )
+    }
   </head>
   <body>
     <div class="mx-auto flex min-h-dvh max-w-2xl flex-col px-6">
